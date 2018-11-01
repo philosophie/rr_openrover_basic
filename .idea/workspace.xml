@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b886320-a2cf-4162-a5cd-f567e37009eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/remote-mappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/rr_openrover_basic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rr_openrover_basic.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msg/RawRrOpenroverBasicFastRateData.msg" beforeDir="false" afterPath="$PROJECT_DIR$/msg/RawRrOpenroverBasicFastRateData.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msg/RawRrOpenroverBasicMedRateData.msg" beforeDir="false" afterPath="$PROJECT_DIR$/msg/RawRrOpenroverBasicMedRateData.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msg/RawRrOpenroverBasicSlowRateData.msg" beforeDir="false" afterPath="$PROJECT_DIR$/msg/RawRrOpenroverBasicSlowRateData.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msg/SmartBatteryStatus.msg" beforeDir="false" afterPath="$PROJECT_DIR$/msg/SmartBatteryStatus.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openrover.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/openrover.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openrover_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/openrover_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/openrover_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/openrover_node.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/openrover_node.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+            <state relative-caret-position="840">
+              <caret line="129" column="32" lean-forward="true" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -70,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/openrover_basic.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="1140" column="32" selection-start-line="1140" selection-start-column="32" selection-end-line="1140" selection-end-column="61" />
+            <state relative-caret-position="-1386">
+              <caret line="309" column="31" lean-forward="true" selection-start-line="309" selection-start-column="31" selection-end-line="309" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -141,9 +131,9 @@
       <find>connect</find>
       <find>stop_bytes</find>
       <find>fd_options</find>
-      <find>baud</find>
       <find>protocol =</find>
       <find>/dev/</find>
+      <find>baud</find>
     </findStrings>
     <replaceStrings>
       <replace>self.rover</replace>
@@ -162,9 +152,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1237" />
-    <option name="y" value="107" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="1431" />
+    <option name="y" value="26" />
     <option name="width" value="1982" />
     <option name="height" value="1261" />
   </component>
@@ -345,12 +335,12 @@
       <workItem from="1541089839384" duration="711000" />
       <workItem from="1541093755213" duration="2405000" />
       <workItem from="1541096200225" duration="395000" />
-      <workItem from="1541097584315" duration="7767000" />
+      <workItem from="1541097584315" duration="8296000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13442000" />
+    <option name="totallyTimeSpent" value="13971000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -362,16 +352,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1237" y="107" width="1982" height="1261" extended-state="0" />
+    <frame x="1431" y="26" width="1982" height="1261" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23985432" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23985432" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298122" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.19592199" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.36347517" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36347517" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32978722" />
@@ -519,13 +509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/openrover_basic.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="1140" column="32" selection-start-line="1140" selection-start-column="32" selection-end-line="1140" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/-1768789424/-125940560/serial/threaded/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="485">
@@ -557,10 +540,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/openrover_basic.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1386">
+          <caret line="309" column="31" lean-forward="true" selection-start-line="309" selection-start-column="31" selection-end-line="309" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/openrover_node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+        <state relative-caret-position="840">
+          <caret line="129" column="32" lean-forward="true" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>
