@@ -1,4 +1,4 @@
 Header header
-int32 left_motor
-int32 right_motor
-int32 flipper_motor
+uint16 left_motor
+uint16 right_motor
+uint16 flipper_motor

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="ubuntu@bulbasaur:22">
+  <component name="PublishConfigData" autoUpload="Always" serverName="bulbasaur" deleteMissingItems="true">
     <serverData>
-      <paths name="ubuntu@bulbasaur:22">
+      <paths name="bulbasaur">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/pycharm_project_947" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/ubuntu/catkin_ws/src/rr_openrover_basic" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

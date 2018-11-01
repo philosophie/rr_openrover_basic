@@ -1,46 +1,59 @@
 from time import sleep
 
 import serial.threaded
+import struct
 
 
 class OpenRoverProtocol(serial.threaded.Protocol):
     SERIAL_START_BYTE = 253
+    on_data_read = None  # type: Callable[[str,int],None]
+    transport = None  #
 
     @staticmethod
     def checksum(values):
         return 255 - sum(values) % 255
 
     def __init__(self):
+        """Serial communication implementation details for OpenRover"""
         self.buffer = bytearray()
         self.transport = None
-        self.callback = (lambda k, v: None)
+        self.on_data_read = None
 
     def connection_made(self, transport):
         """Store transport"""
         self.transport = transport
 
     def connection_lost(self, exc):
-        """Forget transport"""
-        self.transport = None
+        pass
 
     def data_received(self, data):
-        """Called with snippets received from the serial port"""
+        """Called with snippets received from the serial port.
+        Decodes the data and forwards it on """
         self.buffer.extend(data)
 
         while True:
+            #  ignore any data until we find the start byte
             start_byte_index = self.buffer.find(bytearray([self.SERIAL_START_BYTE]))
             self.buffer[:start_byte_index] = []
 
             if len(self.buffer) < 5:
                 return
 
-            packet, self.buffer = bytearray(self.buffer[:5]), self.buffer[5:]
+            packet = bytearray(self.buffer[:5])
+            self.buffer[:5] = []
 
             if packet[4] == self.checksum(packet[1:4]):
                 k = packet[1]
-                v = (packet[2] << 8) + packet[3]
-                cb = self.callback
-                cb(k, v)
+                # todo: this way of decoding data is pretty lousy.
+                if k in (68, 70):
+                    # decode int16
+                    (v,) = struct.unpack_from('>h', packet, 2)
+                else:
+                    # decode uint16
+                    (v,) = struct.unpack_from('>H', packet, 2)
+                on_data_read = self.on_data_read
+                if on_data_read is not None:
+                    on_data_read(k, v)
             else:
                 pass  # packet is bad. ignore it
 
@@ -54,32 +67,40 @@ class OpenRoverProtocol(serial.threaded.Protocol):
                    self.encode_speed(flipper),
                    arg1,
                    arg2]
-        packet = bytearray()
-        packet.append(self.SERIAL_START_BYTE)
-        packet.extend(payload)
-        packet.append(self.checksum(payload))
+        packet = bytearray([self.SERIAL_START_BYTE] + payload + [self.checksum(payload)])
         return self.transport.write(packet)
-
-    def on_read(self, cb):
-        self.callback = cb
 
 
 class OpenRover:
     _motor_left = 0
     _motor_right = 0
     _motor_flipper = 0
-    latest_data = None
+    _latest_data = None
+    _reader_thread = None
+    _protocol = None
 
-    def __init__(self, protocol):
+    def __init__(self):
+        """An OpenRover object """
         self._motor_left = 0
         self._motor_right = 0
         self._motor_flipper = 0
-        self.protocol = protocol
-        self.latest_data = dict()
-        protocol.on_read(self.on_new_openrover_data)
+        self._latest_data = dict()
+
+    def open(self, port, **serial_kwargs):
+        kwargs = dict(baudrate=57600, timeout=0.5, write_timeout=0.5, stopbits=2)
+        kwargs.update(serial_kwargs)
+        serial_device = serial.Serial(port, **kwargs)
+        self._reader_thread = serial.threaded.ReaderThread(serial_device, OpenRoverProtocol)
+        self._reader_thread.start()
+        self._reader_thread.connect()
+        self._protocol = self._reader_thread.protocol
+        self._protocol.on_data_read = self.on_new_openrover_data
+
+    def close(self):
+        self._protocol.close()
 
     def on_new_openrover_data(self, key, value):
-        self.latest_data[key] = value
+        self._latest_data[key] = value
 
     def set_motor_speeds(self, left, right, flipper):
         assert -1 <= left <= 1
@@ -92,7 +113,8 @@ class OpenRover:
     def send_command(self, arg1, arg2):
         assert 0 <= arg1 <= 255
         assert 0 <= arg2 <= 255
-        self.protocol.write(self._motor_left, self._motor_right, self._motor_flipper, arg1, arg2)
+
+        self._protocol.write(self._motor_left, self._motor_right, self._motor_flipper, arg1, arg2)
 
     def send_speed(self):
         self.send_command(0, 0)
@@ -106,30 +128,10 @@ class OpenRover:
     def request_data(self, index):
         self.send_command(10, index)
 
-    def get_data(self, index):
+    def get_data_synchronous(self, index):
         self.request_data(index)
         sleep(0.05)
-        return self.latest_data.get(index)
+        return self.get_data(index)
 
-
-if __name__ == '__main__':
-    device_name = '/dev/rover'
-    ser = serial.Serial(device_name, baudrate=57600, timeout=0.5, write_timeout=0.5, stopbits=2)
-    try:
-        with serial.threaded.ReaderThread(ser, OpenRoverProtocol) as orp:
-            rover = OpenRover(orp)
-            rover.request_data(40)
-
-            for i in range(10):
-                result = rover.get_data(40)
-                assert (result == 40621)
-
-            rover.set_motor_speeds(0, 0, 0)
-            for i in range(5):
-                rover.set_fan_speed(200)
-                sleep(1)  # listen to the fan for a few seconds
-
-            rover.set_fan_speed(0)
-            pass
-    except Exception as e:
-        pass
+    def get_data(self, index):
+        return self._latest_data.get(index)

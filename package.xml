@@ -6,6 +6,8 @@
 
   <maintainer email="jack@digilabs.io">Jack Kilian</maintainer>
   <maintainer email="fragale@digilabs.io">Nick Fragale</maintainer>
+  <maintainer email="dan@digilabs.io">Dan Rose</maintainer>
+
 
   <license>BSD</license>
 
@@ -19,6 +21,7 @@
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>tf</depend>
+  <depend>python-serial</depend>
 
   <depend>roscpp</depend>
   <depend>rospy</depend>
