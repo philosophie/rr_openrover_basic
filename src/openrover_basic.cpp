@@ -888,7 +888,6 @@ void OpenRover::serialManager()
         try{
             if (param1==10) // Param1==10 requests data with index of param2
             {
-                ROS_WARN("Param1 = 10");
                 updateRobotData(param2);
             }
             else if (param1==20)
@@ -1054,7 +1053,7 @@ bool OpenRover::sendCommand(int param1, int param2)
         sprintf(str_ex, "Failed to send command: %02x,%02x,%02x,%02x,%02x,%02x,%02x", write_buffer[0],write_buffer[1],write_buffer[2],write_buffer[3],write_buffer[4],write_buffer[5],write_buffer[6]);
         throw std::string(str_ex);
     }
-
+    ROS_WARN("Sent Command: %02x,%02x,%02x,%02x,%02x,%02x,%02x", write_buffer[0],write_buffer[1],write_buffer[2],write_buffer[3],write_buffer[4],write_buffer[5],write_buffer[6]);
     return true;
 }
 
@@ -1104,6 +1103,7 @@ int OpenRover::readCommand()
         throw std::string(str_ex);
     }
     data = (data1 << 8) + data2;
+    ROS_WARN("Read Command: %02x,%02x,%02x,%02x,%02x", start_byte_read, dataNO, data1, data2, read_checksum);
     return data;
 }
 
