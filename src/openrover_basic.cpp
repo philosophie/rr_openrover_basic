@@ -922,7 +922,7 @@ void OpenRover::serialManager()
             throw;
         }
 
-        ROS_WARN("Just before pubs");
+        ROS_WARN("Just before pubs. %i, %i", serial_fast_buffer_.size(), publish_fast_rate_vals_);
 
         //If one of the buffers are empty, publish the values
         if ((serial_fast_buffer_.size()==0) && publish_fast_rate_vals_)
