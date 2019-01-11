@@ -888,6 +888,7 @@ void OpenRover::serialManager()
         try{
             if (param1==10) // Param1==10 requests data with index of param2
             {
+                ROS_WARN("Param1 = 10");
                 updateRobotData(param2);
             }
             else if (param1==20)
