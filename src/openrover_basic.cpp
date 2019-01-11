@@ -732,6 +732,7 @@ void OpenRover::publishWheelVels() //Update to publish from OdomControl
 
 void OpenRover::publishFastRateData()
 {
+    ROS_INFO("fast rate pub");
     rr_openrover_basic::RawRrOpenroverBasicFastRateData msg;
 
     msg.header.stamp = ros::Time::now();
@@ -747,6 +748,7 @@ void OpenRover::publishFastRateData()
 
 void OpenRover::publishMedRateData()
 {
+    ROS_INFO("med rate pub");
     rr_openrover_basic::RawRrOpenroverBasicMedRateData med_msg;
     std_msgs::Bool is_charging_msg;
 
@@ -801,6 +803,7 @@ rr_openrover_basic::SmartBatteryStatus interpret_battery_status(uint16_t bits) {
 
 void OpenRover::publishSlowRateData()
 {
+    ROS_INFO("med rate pub");
     rr_openrover_basic::RawRrOpenroverBasicSlowRateData slow_msg;
     rr_openrover_basic::SmartBatteryStatus batteryStatusA;
 
