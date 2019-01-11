@@ -732,7 +732,7 @@ void OpenRover::publishWheelVels() //Update to publish from OdomControl
 
 void OpenRover::publishFastRateData()
 {
-    ROS_INFO("fast rate pub");
+    ROS_WARN("fast rate pub");
     rr_openrover_basic::RawRrOpenroverBasicFastRateData msg;
 
     msg.header.stamp = ros::Time::now();
@@ -748,7 +748,7 @@ void OpenRover::publishFastRateData()
 
 void OpenRover::publishMedRateData()
 {
-    ROS_INFO("med rate pub");
+    ROS_WARN("med rate pub");
     rr_openrover_basic::RawRrOpenroverBasicMedRateData med_msg;
     std_msgs::Bool is_charging_msg;
 
@@ -803,7 +803,7 @@ rr_openrover_basic::SmartBatteryStatus interpret_battery_status(uint16_t bits) {
 
 void OpenRover::publishSlowRateData()
 {
-    ROS_INFO("med rate pub");
+    ROS_WARN("med rate pub");
     rr_openrover_basic::RawRrOpenroverBasicSlowRateData slow_msg;
     rr_openrover_basic::SmartBatteryStatus batteryStatusA;
 
@@ -922,9 +922,12 @@ void OpenRover::serialManager()
             throw;
         }
 
+        ROS_WARN("Just before pubs");
+
         //If one of the buffers are empty, publish the values
         if ((serial_fast_buffer_.size()==0) && publish_fast_rate_vals_)
         {
+            ROS_WARN("made it into fast_pub time");
             ros::Time ros_now_time = ros::Time::now();
             double now_time = ros_now_time.toSec();
 
@@ -964,6 +967,7 @@ void OpenRover::serialManager()
         {
             publishSlowRateData();
         }
+        ROS_WARN("End of serialManager");
     }
     return;
 }
@@ -1056,7 +1060,7 @@ bool OpenRover::sendCommand(int param1, int param2)
         sprintf(str_ex, "Failed to send command: %02x,%02x,%02x,%02x,%02x,%02x,%02x", write_buffer[0],write_buffer[1],write_buffer[2],write_buffer[3],write_buffer[4],write_buffer[5],write_buffer[6]);
         throw std::string(str_ex);
     }
-    ROS_WARN("Sent Command: %02x,%02x,%02x,%02x,%02x,%02x,%02x", write_buffer[0],write_buffer[1],write_buffer[2],write_buffer[3],write_buffer[4],write_buffer[5],write_buffer[6]);
+    //ROS_WARN("Sent Command: %02x,%02x,%02x,%02x,%02x,%02x,%02x", write_buffer[0],write_buffer[1],write_buffer[2],write_buffer[3],write_buffer[4],write_buffer[5],write_buffer[6]);
     return true;
 }
 
@@ -1106,7 +1110,7 @@ int OpenRover::readCommand()
         throw std::string(str_ex);
     }
     data = (data1 << 8) + data2;
-    ROS_WARN("Read Command: %02x,%02x,%02x,%02x,%02x", start_byte_read, dataNO, data1, data2, read_checksum);
+    //ROS_WARN("Read Command: %02x,%02x,%02x,%02x,%02x", start_byte_read, dataNO, data1, data2, read_checksum);
     return data;
 }
 
