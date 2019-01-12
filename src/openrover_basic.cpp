@@ -851,31 +851,31 @@ void OpenRover::serialManager()
     unsigned char param2;
     static double past_time = 0;
 
-    while ((serial_fast_buffer_.size()>1) || (serial_medium_buffer_.size()>1) || (serial_slow_buffer_.size()>1) || (serial_fan_buffer_.size()>1))
+    while ((serial_fast_buffer_.size()>0) || (serial_medium_buffer_.size()>0) || (serial_slow_buffer_.size()>0) || (serial_fan_buffer_.size()>0))
     {
         // Fast data gets highest priority from being first in this if statement
         // If the CPU running the driver can only process 60 commands / second and the fast
         // data rate is set to 60hz, no other data will be gathered and the medium and slow Buffers
         // will fill up and issue a warning.
-        if (serial_fast_buffer_.size()>1)
+        if (serial_fast_buffer_.size()>0)
         {
             param1 = 10;
             param2 = serial_fast_buffer_.back();
             serial_fast_buffer_.pop_back();
         }
-        else if (serial_fan_buffer_.size()>1)
+        else if (serial_fan_buffer_.size()>0)
         {
             param1 = 20;
             param2 = serial_fan_buffer_.back();
             serial_fan_buffer_.pop_back();
         }
-        else if (serial_medium_buffer_.size()>1)
+        else if (serial_medium_buffer_.size()>0)
         {
             param1 = 10;
             param2 = serial_medium_buffer_.back();
             serial_medium_buffer_.pop_back();
         }
-        else if (serial_slow_buffer_.size()>1)
+        else if (serial_slow_buffer_.size()>0)
         {
             param1 = 10;
             param2 = serial_slow_buffer_.back();
