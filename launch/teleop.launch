@@ -33,6 +33,7 @@
         <param name="adjustable_throttle" value="True" />
         <param name="drive_increment" value="20" />
         <param name="flipper_increment" value="20" />
+        <param name="driver" value="xpad" />
     </node>
 
     <!-- Control input manager -->
